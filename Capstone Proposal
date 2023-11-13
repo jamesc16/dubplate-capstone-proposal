@@ -1,0 +1,141 @@
+# Project Title
+
+## Overview
+
+An application that enables users to curate a personal library of snippets from live music performances.
+
+### Problem
+
+Live music performances (whether it be a concert, radio show, or DJ set) are often uploaded to sites like Soundcloud or YouTube, however there is little thought given to their consumability. Videos uploaded are often very lengthy and it is difficult for consumers to navigate to their favourite parts. 'Dubplate' aims to fill this problem space by allowing users to create snippets of their favourite live music recordings.
+
+### User Profile
+
+The app will be used by music lovers, and anyone who wishes to access live music in a more bite-size format. They will use it by logging into the website, and playing snippets from a library they have created on demand. A special consideration is that users will have to first find the URL of the music performances which they want to clip on YouTube (as that will be the focus for the first instance of this application), and then navigate to the app and clip & save from there.
+
+### Features
+
+1. Clipping Feature - This is the primary function of the application. Users can find the URL of the YouTube video they desire, paste it into an input box in the application, and select a start and end point for their clip
+2. Clip Library - Clipped videos can be saved into a library which is personal for each user.
+3. Log-in / Account Feature - It is important that users can create a personal library only available to them, hence log-in functionality is required.
+4. Editing & Deletion - For ease of use and Quality of Life, clips should be editable and deletable from the Clip Library page.
+
+## Implementation
+
+### Tech Stack
+
+<> BackEnd
+
+1. Node.js
+2. Express.js - This and Node.js will be used for server-side functionality to host users log-in details, as well as information on their clip library.
+3. Knex - Database query building
+4. MySQL - Database hosting
+
+<> Frontend
+
+1. React & JSX - used for the front-end functionality and visual design of the application
+2. React Router - to allow SPA routing
+3. Sass - To enhance styling capabilities in react
+4. Axios - For making HTTP requests to the application's server
+
+<> Notes on other tech
+
+1. iFrame - this is key for the playback functionality of clips
+2. Next.js - I am considering using Next.js to improve speed of functionality development and design (NB: Tailwind for stying, NextAuth.js for login authentication)
+
+### APIs
+
+1. YouTube API - It is unclear whether this will be needed for the application. Potentially yes, in order to receive response data on the selected video's length, creator, description etc.
+
+### Sitemap
+
+> /home
+
+This is the landing page for the site that will contain a hero section as well as a brief description of the app's premise. It will also prompt the users to log-in / sign-up.
+
+> /login
+
+Here users can log-in to their account. Once they have done so, they will be redirected to the Cutting House.
+
+> /cutting-house
+
+This page will be where video URLs can be pasted into an input, and the start/endpoints are selected, and then clips are saved. On this page there will a link to the library page.
+
+> /library
+
+This page will have a compilation of all the user's clips. Here, clips can be deleted.
+
+### Mockups
+
+Provide visuals of your app's screens. You can use tools like Figma or pictures of hand-drawn sketches.
+
+![Initial mockup](image0.jpeg)
+
+Please note that this is a first-draft mockup. It also contains design for a leaderboard / social functionality page which is currently considered as a 'Nice to have'.
+
+### Data
+
+The relationship between data is primarily that of 'one-to-many'. One user will have many clips associated with them, and clips (in the initial draft of the application) can only be associated with a single user.
+
+### Endpoints
+
+List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
+
+GET -> getUserClips: this request aims to get all of a user's clips for display in their library, and will return an array of objects that contain the following:
+
+{
+id: 1
+url: "https://www.youtube.com/watch?v=7BqFs2MZJ50&ab_channel=BoilerRoom"
+start_point: "120"
+end_point: "240"
+channel: "Boiler Room"
+dp_user: "james-cook-99"
+dp_title: "DJ Maximum X Skepta"
+dp_artist: ["DJ Maximum", "Skepta"]
+creation_date: 1699754392
+}
+
+POST -> saveUserClip -> this request will post the details of the clip they've just made to the server which they can access via their library
+
+PATCH -> editUserClip -> this request will allow users to edit the following details about the clip: start_point, end_point, dp_title, and dp_artist
+
+DELETE -> deleteUserClip -> this request allows users to delete a clip
+
+### Auth
+
+Yes, auth will be required. NextAuth.js is being considered for auth implementation.
+
+However, for the intial deployment of the application, a mock authorisation functionality will be the aim to demonstrate the application's intention.
+
+## Roadmap
+
+> Sprint 1 - the cutting house (approx 2 days)
+
+1. Initialise project (frontend repo, create-react-app, server repo)
+2. Setup backend requests
+3. Build front end scaffolding that allows for input of YouTube link, startpoint, and endpoint, and then save these details to the backend
+
+> Sprint 2 - the library (approx 4 days)
+
+1. Create front end scaffolding that allows users to view a list of their clips
+2. Implement PATCH and DELETE functionality
+3. Implement playback functionality (including play/pause, skip back/forwards, and play next/previous track)
+
+> Sprint 3 - visual design (approx 5 days)
+
+1. Create a detailed mockup for visual design and create a site-wide standards for design elements
+2. Set up variables and mixins for reusable components
+3. Style all pages
+
+> Sprint 4 - nice to haves (rest of deadline)
+
+Here I will focus on adding nice to haves, as many of them will enhance the utility of the application considerably. They will be implemented in the following order:
+
+1. Clip sharing - I would like users to be able to create social groups with other users where they can all post clips of their own into a shared library, and comment on each others' clips. This is a considerably large task, hence I have left it out of the main scope and focused instead on the primary functionality.
+2. Dark/light mode
+3. Animations & enhanced visual design
+
+## Nice-to-haves
+
+1. Clip sharing - I would like users to be able to create social groups with other users where they can all post clips of their own into a shared library, and comment on each others' clips. This is a considerably large task, hence I have left it out of the main scope and focused instead on the primary functionality.
+2. Dark/light mode
+3. Animations & enhanced visual design
